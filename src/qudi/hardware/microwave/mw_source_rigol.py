@@ -484,9 +484,14 @@ class MicrowaveRigolHardware(MicrowaveInterface, MicrowaveRigol):
                 self.log.error("This mode is not implemented")
 
     def _configure_sweep_mode(self):
+        """
+        In this configuration, frequencies are swept when a trigger is detected.
+        The device moves to another repetition automatically.
+        Sampling clock output can be used for this purpose.
+        """
         self.set_sweep_manner("FREQ")
-        self.set_sweep_trig_mode("EXT")
-        self.set_point_trig_mode("AUTO")
+        self.set_sweep_trig_mode("AUTO")
+        self.set_point_trig_mode("EXT")
 
     @property
     def _sweep_mode(self):
